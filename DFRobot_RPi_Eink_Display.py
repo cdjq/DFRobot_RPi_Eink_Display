@@ -468,7 +468,7 @@ class FreetypeHelper:
                         rslt[i * line_data_len + (j + left) // 8 + top] |= 0x80 >> ((j + left) % 8)
                     except:
                         print(
-                            "freetype_helper getOne err: width: %d, height: %d, top: %d, left: %d, rslt_len: %d, origin_y: %d" % (
+                            "freetype_helper get one err: width: %d, height: %d, top: %d, left: %d, rslt_len: %d, origin_y: %d" % (
                                 width, height, top, left, len(rslt), origin_y))
                         raise "err"
                     # rslt[i * line_data_len + (j + left) // 8 + top] |= 0x80 >> ((j + left) % 8)
@@ -549,19 +549,19 @@ class DFRobot_Display():
         self._width = w
         self._height = h
 
-        self._lineWidth = 1
-        self._bitmapSize = 1
-        self._bitmapFmt = ""
-        self._bmpFmt = self.BITMAP_TBMLLR
+        self._line_width = 1
+        self._bitmap_size = 1
+        self._bitmap_fmt = ""
+        self._bmp_fmt = self.BITMAP_TBMLLR
 
         self._fonts = Fonts()
-        self._textSize = 1
-        self._textColor = self.BLACK
-        self._textBackground = self.WHITE
-        self._textCursorX = 0
-        self._textCursorY = 0
-        self._textIntervalRow = 0
-        self._textIntervalCol = 0
+        self._text_size = 1
+        self._text_color = self.BLACK
+        self._text_background = self.WHITE
+        self._text_cursor_x = 0
+        self._text_cursor_y = 0
+        self._text_interval_row = 0
+        self._text_interval_col = 0
 
     def set_line_width(self, w):
         """!
@@ -569,7 +569,7 @@ class DFRobot_Display():
         """
         if w < 0:
             return
-        self._lineWidth = w
+        self._line_width = w
 
     def set_text_format(self, size, color, background, interval_row=2, interval_col=0):
         """!
@@ -580,13 +580,13 @@ class DFRobot_Display():
           @param interval_row 字体行之间的间隔
           @param interval_col 字体列之间的间隔
         """
-        self._textColor = color
-        self._textIntervalRow = interval_row
-        self._textIntervalCol = interval_col
-        self._textBackground = background
+        self._text_color = color
+        self._text_interval_row = interval_row
+        self._text_interval_col = interval_col
+        self._text_background = background
         if size < 0:
             return
-        self._textSize = size
+        self._text_size = size
 
     def set_text_cursor(self, x, y):
         """!
@@ -594,8 +594,8 @@ class DFRobot_Display():
           @param x x轴坐标
           @param y y轴坐标
         """
-        self._textCursorX = int(x)
-        self._textCursorY = int(y)
+        self._text_cursor_x = int(x)
+        self._text_cursor_y = int(y)
 
     def set_bitmap_size(self, size):
         """!
@@ -604,14 +604,14 @@ class DFRobot_Display():
         """
         if size < 0:
             return
-        self._bitmapSize = size
+        self._bitmap_size = size
 
     def set_bitmap_fmt(self, fmt):
         """!
           @brief 设置位图显示格式
           @param fmt 格式配置
         """
-        self._bmpFmt = fmt
+        self._bmp_fmt = fmt
 
     def set_ex_fonts(self, obj):
         """!
@@ -679,8 +679,8 @@ class DFRobot_Display():
           @param color 颜色
         """
         self.filled_rect(0, 0, self._width, self._height, color)
-        self._textCursorX = 0
-        self._textCursorY = 0
+        self._text_cursor_x = 0
+        self._text_cursor_y = 0
 
     def vertical_line(self, x, y, h, color):
         """!
@@ -694,11 +694,11 @@ class DFRobot_Display():
         y = int(y)
         h = int(h)
         direction = self._get_direction(h)
-        x -= self._lineWidth // 2
+        x -= self._line_width // 2
         h = self._ternary_expression(h > 0, h, -h)
         for i in range(self._ternary_expression(h > 0, h, - h)):
             xx = x
-            for j in range(self._lineWidth):
+            for j in range(self._line_width):
                 self.pixel(xx, y, color)
                 xx += 1
             y += direction
@@ -715,10 +715,10 @@ class DFRobot_Display():
         y = int(y)
         w = int(w)
         direction = self._get_direction(w)
-        y -= self._lineWidth // 2
+        y -= self._line_width // 2
         for i in range(self._ternary_expression(w > 0, w, - w)):
             yy = y
-            for j in range(self._lineWidth):
+            for j in range(self._line_width):
                 self.pixel(x, yy, color)
                 yy += 1
             x += direction
@@ -802,19 +802,19 @@ class DFRobot_Display():
         y1 = int(y1)
         x2 = int(x2)
         y2 = int(y2)
-        temp = self._lineWidth
-        self._lineWidth = 1
+        temp = self._line_width
+        self._line_width = 1
         if x == x1 and x == x2:
             ymax = max([y, y1, y2])
             ymin = min([y, y1, y2])
             self.horizontal_line(x, ymin, ymax - ymin, color)
-            self._lineWidth = temp
+            self._line_width = temp
             return
         if y == y1 and y == y2:
             xmax = max([x, x1, x2])
             xmin = max([x, x1, x2])
             self.vertical_line(xmin, y, xmax - xmin, color)
-            self._lineWidth = temp
+            self._line_width = temp
             return
 
         direction = self.POSITIVE
@@ -859,7 +859,7 @@ class DFRobot_Display():
             for i in range(dy1):
                 self.horizontal_line(x + dx1 * i / dy1, y1 + dy1 - i, (x + dx2 * i / dy1) - (x + dx1 * i / dy1) + 1,
                                      color)
-        self._lineWidth = temp
+        self._line_width = temp
 
     def hollow_rect(self, x, y, w, h, color):
         """!
@@ -876,10 +876,10 @@ class DFRobot_Display():
         if h < 0:
             y += h
             h = -h
-        self.horizontal_line(x - self._lineWidth // 2, y, w + self._lineWidth, color)
-        self.horizontal_line(x - self._lineWidth // 2, y + h, w + self._lineWidth, color)
-        self.vertical_line(x, y - self._lineWidth // 2, h + self._lineWidth, color)
-        self.vertical_line(x + w, y - self._lineWidth // 2, h + self._lineWidth, color)
+        self.horizontal_line(x - self._line_width // 2, y, w + self._line_width, color)
+        self.horizontal_line(x - self._line_width // 2, y + h, w + self._line_width, color)
+        self.vertical_line(x, y - self._line_width // 2, h + self._line_width, color)
+        self.vertical_line(x + w, y - self._line_width // 2, h + self._line_width, color)
 
     def filled_rect(self, x, y, w, h, color):
         """!
@@ -890,14 +890,14 @@ class DFRobot_Display():
           @param h 矩形高度
           @param color 颜色
         """
-        temp = self._lineWidth
-        self._lineWidth = 1
+        temp = self._line_width
+        self._line_width = 1
         if w < 0:
             x += w
             w = abs(w)
         for i in range(w):
             self.vertical_line(x + i, y, h, color)
-        self._lineWidth = temp
+        self._line_width = temp
 
     QUADRANT_1 = 1
     QUADRANT_2 = 2
@@ -931,7 +931,7 @@ class DFRobot_Display():
         if quadrant & self.QUADRANT_4:
             self.vertical_line(x, y + r, 1, color)
 
-        half_line_width = self._lineWidth // 2
+        half_line_width = self._line_width // 2
         while vx < vy:
             if p >= 0:
                 vy -= 1
@@ -941,24 +941,24 @@ class DFRobot_Display():
             dx += 2
             p += dx
             if quadrant & self.QUADRANT_1:
-                self.filled_rect(x + vx - half_line_width, y - vy - half_line_width, self._lineWidth, self._lineWidth,
+                self.filled_rect(x + vx - half_line_width, y - vy - half_line_width, self._line_width, self._line_width,
                                  color)  # quadrant 1
-                self.filled_rect(x + vy - half_line_width, y - vx - half_line_width, self._lineWidth, self._lineWidth,
+                self.filled_rect(x + vy - half_line_width, y - vx - half_line_width, self._line_width, self._line_width,
                                  color)  # quadrant 1
             if quadrant & self.QUADRANT_2:
-                self.filled_rect(x - vx - half_line_width, y - vy - half_line_width, self._lineWidth, self._lineWidth,
+                self.filled_rect(x - vx - half_line_width, y - vy - half_line_width, self._line_width, self._line_width,
                                  color)  # quadrant 2
-                self.filled_rect(x - vy - half_line_width, y - vx - half_line_width, self._lineWidth, self._lineWidth,
+                self.filled_rect(x - vy - half_line_width, y - vx - half_line_width, self._line_width, self._line_width,
                                  color)  # quadrant 2
             if quadrant & self.QUADRANT_3:
-                self.filled_rect(x - vx - half_line_width, y + vy - half_line_width, self._lineWidth, self._lineWidth,
+                self.filled_rect(x - vx - half_line_width, y + vy - half_line_width, self._line_width, self._line_width,
                                  color)  # quadrant 3
-                self.filled_rect(x - vy - half_line_width, y + vx - half_line_width, self._lineWidth, self._lineWidth,
+                self.filled_rect(x - vy - half_line_width, y + vx - half_line_width, self._line_width, self._line_width,
                                  color)  # quadrant 3
             if quadrant & self.QUADRANT_4:
-                self.filled_rect(x + vx - half_line_width, y + vy - half_line_width, self._lineWidth, self._lineWidth,
+                self.filled_rect(x + vx - half_line_width, y + vy - half_line_width, self._line_width, self._line_width,
                                  color)  # quadrant 4
-                self.filled_rect(x + vy - half_line_width, y + vx - half_line_width, self._lineWidth, self._lineWidth,
+                self.filled_rect(x + vy - half_line_width, y + vx - half_line_width, self._line_width, self._line_width,
                                  color)  # quadrant 4
 
     def hollow_circle(self, x, y, r, color):
@@ -983,8 +983,8 @@ class DFRobot_Display():
         x = int(x)
         y = int(y)
         r = abs(int(r))
-        temp = self._lineWidth
-        self._lineWidth = 1
+        temp = self._line_width
+        self._line_width = 1
         vx = 0
         vy = r
         dx = 1
@@ -1019,7 +1019,7 @@ class DFRobot_Display():
             if quadrant & self.QUADRANT_4:
                 self.vertical_line(x + vx, y + vy, - vy, color)  # quadrant 4
                 self.vertical_line(x + vy, y + vx, - vx, color)  # quadrant 4
-        self._lineWidth = temp
+        self._line_width = temp
 
     def filled_circle(self, x, y, r, color):
         """!
@@ -1100,15 +1100,15 @@ class DFRobot_Display():
             for j in range(8):
                 if i & data_bit:
                     if exchange:
-                        self.filled_rect(static_axis, increase_axis, self._bitmapSize, self._bitmapSize, color)
+                        self.filled_rect(static_axis, increase_axis, self._bitmap_size, self._bitmap_size, color)
                     else:
-                        self.filled_rect(increase_axis, static_axis, self._bitmapSize, self._bitmapSize, color)
+                        self.filled_rect(increase_axis, static_axis, self._bitmap_size, self._bitmap_size, color)
                 else:
                     if exchange:
-                        self.filled_rect(static_axis, increase_axis, self._bitmapSize, self._bitmapSize, background)
+                        self.filled_rect(static_axis, increase_axis, self._bitmap_size, self._bitmap_size, background)
                     else:
-                        self.filled_rect(increase_axis, static_axis, self._bitmapSize, self._bitmapSize, background)
-                increase_axis += self._bitmapSize
+                        self.filled_rect(increase_axis, static_axis, self._bitmap_size, self._bitmap_size, background)
+                increase_axis += self._bitmap_size
                 if data_bit & 0x80:
                     i <<= 1
                 else:
@@ -1130,52 +1130,52 @@ class DFRobot_Display():
         x = abs(int(x))
         y = abs(int(y))
 
-        if self._bmpFmt == self.BITMAP_TBMLLR:
+        if self._bmp_fmt == self.BITMAP_TBMLLR:
             one_line_data_len = (w - 1) // 8 + 1
             for i in range(h):
-                y_mask = y + i * self._bitmapSize
+                y_mask = y + i * self._bitmap_size
                 self._bitmap_helper(x, y_mask, bitmap[i * one_line_data_len: one_line_data_len * (i + 1)], 0x80, False, color,
                                     background)
-        elif self._bmpFmt == self.BITMAP_TBMRLL:
+        elif self._bmp_fmt == self.BITMAP_TBMRLL:
             one_line_data_len = (w - 1) // 8 + 1
             for i in range(h):
-                y_mask = y + i * self._bitmapSize
+                y_mask = y + i * self._bitmap_size
                 self._bitmap_helper(x, y_mask, bitmap[i * one_line_data_len: one_line_data_len * (i + 1)], 0x01, False, color,
                                     background)
-        elif self._bmpFmt == self.BITMAP_BTMLLR:
+        elif self._bmp_fmt == self.BITMAP_BTMLLR:
             one_line_data_len = (w - 1) // 8 + 1
             for i in range(h):
-                y_mask = y + h * self._bitmapSize - i * self._bitmapSize
+                y_mask = y + h * self._bitmap_size - i * self._bitmap_size
                 self._bitmap_helper(x, y_mask, bitmap[i * one_line_data_len: one_line_data_len * (i + 1)], 0x80, False, color,
                                     background)
-        elif self._bmpFmt == self.BITMAP_BTMRLL:
+        elif self._bmp_fmt == self.BITMAP_BTMRLL:
             one_line_data_len = (w - 1) // 8 + 1
             for i in range(h):
-                y_mask = y + h * self._bitmapSize - i * self._bitmapSize
+                y_mask = y + h * self._bitmap_size - i * self._bitmap_size
                 self._bitmap_helper(x, y_mask, bitmap[i * one_line_data_len: one_line_data_len * (i + 1)], 0x01, False, color,
                                     background)
-        elif self._bmpFmt == self.BITMAP_LRMTLB:
+        elif self._bmp_fmt == self.BITMAP_LRMTLB:
             one_line_data_len = (h - 1) // 8 + 1
             for i in range(w):
-                x_mask = x + i * self._bitmapSize
+                x_mask = x + i * self._bitmap_size
                 self._bitmap_helper(y, x_mask, bitmap[i * one_line_data_len: one_line_data_len * (i + 1)], 0x80, True, color,
                                     background)
-        elif self._bmpFmt == self.BITMAP_LRMBLT:
+        elif self._bmp_fmt == self.BITMAP_LRMBLT:
             one_line_data_len = (h - 1) // 8 + 1
             for i in range(w):
-                x_mask = x + i * self._bitmapSize
+                x_mask = x + i * self._bitmap_size
                 self._bitmap_helper(y, x_mask, bitmap[i * one_line_data_len: one_line_data_len * (i + 1)], 0x01, True, color,
                                     background)
-        elif self._bmpFmt == self.BITMAP_RLMTLB:
+        elif self._bmp_fmt == self.BITMAP_RLMTLB:
             one_line_data_len = (h - 1) // 8 + 1
             for i in range(w):
-                x_mask = x + w * self._bitmapSize - i * self._bitmapSize
+                x_mask = x + w * self._bitmap_size - i * self._bitmap_size
                 self._bitmap_helper(y, x_mask, bitmap[i * one_line_data_len: one_line_data_len * (i + 1)], 0x80, True, color,
                                     background)
-        elif self._bmpFmt == self.BIMTAP_RLMBLT:
+        elif self._bmp_fmt == self.BIMTAP_RLMBLT:
             one_line_data_len = (h - 1) // 8 + 1
             for i in range(w):
-                x_mask = x + w * self._bitmapSize - i * self._bitmapSize
+                x_mask = x + w * self._bitmap_size - i * self._bitmap_size
                 self._bitmap_helper(y, x_mask, bitmap[i * one_line_data_len: one_line_data_len * (i + 1)], 0x01, True, color,
                                     background)
 
@@ -1208,7 +1208,7 @@ class DFRobot_Display():
         if color_bits == 24:
             width3 = width * 3
             for i in range(height):
-                self.startDrawBitmapFile(x, y + height - i)
+                self.start_draw_bitmap_file(x, y + height - i)
                 buf = []
                 left = dib_offset + i * width3
                 i = 0
@@ -1217,7 +1217,7 @@ class DFRobot_Display():
                     buf.append(c[left + i + 1])
                     buf.append(c[left + i + 0])
                     i += 3
-                self.bitmapFileHelper(buf)
+                self.bitmap_file_helper(buf)
             self.end_draw_bitmap_file()
 
         elif color_bits == 1:
@@ -1260,28 +1260,28 @@ class DFRobot_Display():
         if len(c) > 1:
             c = c[0]
         (l, width, height, fmt) = self._fonts.get_one_character(c)
-        temp = self._bmpFmt
-        self._bmpFmt = fmt
-        ts = self._textSize
+        temp = self._bmp_fmt
+        self._bmp_fmt = fmt
+        ts = self._text_size
         if ord(c) == ord("\n"):
-            self._textCursorX = 0
-            self._textCursorY += height * ts + self._textIntervalCol
+            self._text_cursor_x = 0
+            self._text_cursor_y += height * ts + self._text_interval_col
         elif len(l):
-            temp1 = self._bitmapSize
-            self._bitmapSize = ts
-            self._textCursorX += self._textIntervalRow
-            if self._textCursorX + ts * width > self._width:
-                self.filled_rect(self._textCursorX, self._textCursorY, self._width - self._textCursorX,
-                                 self._fonts._extension_fonts_height * ts + self._textIntervalCol, self._textBackground)
-                self._textCursorX = self._textIntervalRow
-                self._textCursorY += ts * self._fonts._extension_fonts_height + self._textIntervalCol
-            self.filled_rect(self._textCursorX, self._textCursorY,
-                             self._fonts._extension_fonts_width * ts + self._textIntervalRow,
-                             self._fonts._extension_fonts_height * ts + self._textIntervalCol, self._textBackground)
-            self.bitmap(self._textCursorX, self._textCursorY, l, width, height, self._textColor, self._textBackground)
-            self._textCursorX += ts * width
-            self._bitmapSize = temp1
-        self._bmpFmt = temp
+            temp1 = self._bitmap_size
+            self._bitmap_size = ts
+            self._text_cursor_x += self._text_interval_row
+            if self._text_cursor_x + ts * width > self._width:
+                self.filled_rect(self._text_cursor_x, self._text_cursor_y, self._width - self._text_cursor_x,
+                                 self._fonts._extension_fonts_height * ts + self._text_interval_col, self._text_background)
+                self._text_cursor_x = self._text_interval_row
+                self._text_cursor_y += ts * self._fonts._extension_fonts_height + self._text_interval_col
+            self.filled_rect(self._text_cursor_x, self._text_cursor_y,
+                             self._fonts._extension_fonts_width * ts + self._text_interval_row,
+                             self._fonts._extension_fonts_height * ts + self._text_interval_col, self._text_background)
+            self.bitmap(self._text_cursor_x, self._text_cursor_y, l, width, height, self._text_color, self._text_background)
+            self._text_cursor_x += ts * width
+            self._bitmap_size = temp1
+        self._bmp_fmt = temp
 
     def _bytes_to_number(self, data):
         r = 0
@@ -1328,13 +1328,13 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
         self._cd = GPIO(cd, GPIO.OUT)
         self._rst = GPIO(rst, GPIO.OUT)
         length = 4000
-        self._displayBuffer = bytearray(length)
+        self._display_buffer = bytearray(length)
         i = 0
         while i < length:
-            self._displayBuffer[i] = 0x00
+            self._display_buffer[i] = 0x00
             i = i + 1
-        self._isBusy = False
-        self._busyExitEdge = GPIO.RISING
+        self._is_busy = False
+        self._busy_exit_edge = GPIO.RISING
         self._fonts.set_fonts(fonts_6_8)
         self.set_ex_fonts_fmt(16, 16)
 
@@ -1388,14 +1388,14 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
         sy = int((y + 1) % 8)
         if color == self.WHITE:
             if sy != 0:
-                self._displayBuffer[m] = self._displayBuffer[m] | int(pow(2, 8 - sy))
+                self._display_buffer[m] = self._display_buffer[m] | int(pow(2, 8 - sy))
             else:
-                self._displayBuffer[m - 1] = self._displayBuffer[m - 1] | 1
+                self._display_buffer[m - 1] = self._display_buffer[m - 1] | 1
         elif color == self.BLACK:
             if sy != 0:
-                self._displayBuffer[m] = self._displayBuffer[m] & (0xff - int(pow(2, 8 - sy)))
+                self._display_buffer[m] = self._display_buffer[m] & (0xff - int(pow(2, 8 - sy)))
             else:
-                self._displayBuffer[m - 1] = self._displayBuffer[m - 1] & 0xfe
+                self._display_buffer[m - 1] = self._display_buffer[m - 1] & 0xfe
 
     def flush(self, mode):
         """!
@@ -1410,7 +1410,7 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
         if mode == self.FULL:
             self.is_full = True
         if mode == self.PART:
-            self._dis_part(0, 250, 250, 128)
+            self._dis_part(0, 249, 249, 128)
         else:
             self._dis_all()
             self._sleep()
@@ -1451,7 +1451,6 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
         self.clear(self.WHITE)
         self.flush(self.FULL)
         if self.VERSION == self.GDEH0213B7_SERIES:
-            # self.flush(self.PART)
             time.sleep(0.1)
         elif self.VERSION == self.GDEH0213B1:
             time.sleep(0.1)
@@ -1487,7 +1486,7 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
         time.sleep(0.01)
 
     def set_busy_cb(self, cb):
-        self._busy.set_interrupt(self._busyExitEdge, cb)
+        self._busy.set_interrupt(self._busy_exit_edge, cb)
 
     def _set_ram_data(self, x_start, x_end, y_start, y_start1, y_end, y_end1):
         self.write_cmd_and_data(0x44, [x_start, x_end])
@@ -1519,7 +1518,7 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
             size_x = size_x + (8 - size_x % 8)
         size_x = size_x // 8
 
-        self.write_cmd_and_data(0x24, self._displayBuffer[0: size_x * size_y])
+        self.write_cmd_and_data(0x24, self._display_buffer[0: size_x * size_y])
 
     def _sleep(self):
         self.write_cmd_and_data(0x10, [0x01])
@@ -1538,12 +1537,12 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
         self.write_cmd_and_data(0x20, [])
 
     def _wait_busy_exit(self):
-        temp = 0
+        #temp = 0
         while self.read_busy():
             time.sleep(0.01)
-            temp = temp + 1
-            if (temp % 200) == 0:
-                print("waitBusyExit")
+            #temp = temp + 1
+            #if (temp % 200) == 0:
+            #    print("Wait Busy Exit")
 
     def _power_on(self):
         self.write_cmd_and_data(0x22, [0xC0])
@@ -1576,33 +1575,26 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
             self.write_data(0x00)
 
     def _dis_part(self, x_start, y_start, width, height):
-        # self._set_ram_data(x_start // 8, x_end // 8, y_end % 256, y_end // 256, y_start % 256, y_start // 256)
-        # self._set_ram_pointer(x_start // 8, y_end % 256, y_end // 256)
-        # self._write_dis_ram(x_end - x_start, y_end - y_start + 1)
-        # self._update_dis(self.PART)
-
-        # self.write_cmd_and_data(0x91, [])
-        # self.write_cmd_and_data(0x90, [x_start,x_end,y_start/256,y_start%256,y_end/256,y_end%256,0x28])
-
         x_start = x_start // 8
-        x_end = x_start + height // 8 - 1
+        x_end = x_start + height// 8 - 1
 
         y_start1 = 0
         y_start2 = y_start
         if y_start >= 256:
             y_start1 = y_start2 // 256
             y_start2 = y_start2 % 256
+        
         y_end1 = 0
         y_end2 = y_start + width - 1
         if y_end2 >= 256:
             y_end1 = y_end2 // 256
             y_end2 = y_end2 % 256
+
         self.write_cmd_and_data(0x44, [x_start, x_end])
         self.write_cmd_and_data(0x45, [y_start2, y_start1, y_end2, y_end1])
         self.write_cmd_and_data(0x4E, [x_start])
         self.write_cmd_and_data(0x4F, [y_start2, y_start1])
-        # self._wait_busy_exit()
-        self.write_cmd_and_data(0x24, self._displayBuffer[0:4000])
+        self.write_cmd_and_data(0x24, self._display_buffer[0:4000])
         self._wait_busy_exit()
         self.write_cmd_and_data(0x37, [0x00, 0x40, 0x20, 0x10, 0x00, 0x40, 0x00, 0x00])
         self.write_cmd_and_data(0x3C, [0x80])
@@ -1612,7 +1604,7 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
 
     def _dis_all(self):
         self._init(self.PART)
-        self.write_cmd_and_data(0x24, self._displayBuffer[0: 4000])
+        self.write_cmd_and_data(0x24, self._display_buffer[0: 4000])
         self.write_cmd_and_data(0x26, [])
         for i in range(0, 4000):
             self.write_data(0x0)
