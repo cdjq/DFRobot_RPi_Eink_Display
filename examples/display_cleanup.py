@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 """!
   @file display_cleanup.py
   @brief 清空显示内容
@@ -24,6 +25,7 @@ RASPBERRY_PIN_CS = 27
 RASPBERRY_PIN_CD = 17
 RASPBERRY_PIN_BUSY = 4
 RASPBERRY_PIN_RST = 26
+
 eink_display = DFRobot_RPi_Eink_Display(RASPBERRY_SPI_BUS, RASPBERRY_SPI_DEV, RASPBERRY_PIN_CS,
                                         RASPBERRY_PIN_CD, RASPBERRY_PIN_BUSY,
                                         RASPBERRY_PIN_RST)  # create E-ink display object
