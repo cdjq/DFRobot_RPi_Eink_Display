@@ -8,7 +8,7 @@
 断电后保持最后一屏内容等特点。由于墨水屏全局刷新时间较长，不建议用于频繁动态刷新显示数据的场合。
 ![产品效果图片](./resources/images/DFR0591.jpg)
 
-## Product Link（https://www.dfrobot.com)
+## Product Link（https://www.dfrobot.com/product-1866.html)
 
     SKU： DFR0591： 2.13" e-ink Display Module for Raspberry Pi 4B/3B+/Zero W
 
@@ -27,7 +27,14 @@
 
 ## Installation
 
-要使用库，请首先下载该库到树莓派，然后打开例程文件夹。使用命令
+要使用库，请首先下载该库到树莓派
+
+```
+git clone https://github.com/DFRobot/DFRobot_Eink_RPi_Display
+```
+
+然后打开例程文件夹。使用命令
+
 ```python
 python display_xxx.py
 ```

@@ -27,7 +27,14 @@
 
 
 ## 库安装
-要使用库，请首先下载该库到树莓派，然后打开例程文件夹。使用命令
+要使用库，请首先下载该库到树莓派
+
+```
+git clone https://github.com/DFRobot/DFRobot_Eink_RPi_Display
+```
+
+然后打开例程文件夹。使用命令
+
 ```python
 python display_xxx.py
 ```
