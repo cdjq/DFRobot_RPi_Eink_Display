@@ -5,7 +5,8 @@
   @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   @License     The MIT License (MIT)
   @author      fengli(li.feng@dfrobot.com)
-  @version     V3.0
+  @maintainer  NephogramX(longjian.xu@dfrobot.com)
+  @version     V1.0
   @date        2023.2.20
   @url         https://github.com/DFRobot/DFRobot_RPi_Eink_Display
 """
