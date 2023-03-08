@@ -1614,4 +1614,4 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
         self.write_cmd_and_data(0x20, [])
 
     def __del__(self):
-        GPIO.cleanup(GPIO)
+        self._busy.cleanup()
