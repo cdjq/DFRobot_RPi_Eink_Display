@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 """!
   @file display_multiLingual.py
-  @brief 字体示例
+  @brief Font example 
   @n print with fonts file, Different files will have different display effects
   @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   @License     The MIT License (MIT)
