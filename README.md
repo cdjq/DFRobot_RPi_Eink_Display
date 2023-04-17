@@ -1,16 +1,13 @@
 # DFRobot_RPi_Eink_Display
 - [中文版](./README_CN.md)
 
-这款树莓派墨水屏显示器模块，搭载一块2.13寸250×122分辨率电子墨水屏，采用SPI接口与树莓派通信。
-该模块将树莓派的引脚引出，使用墨水屏的同时，不影响你使用树莓派引脚。该墨水屏可以自定义字体，
-通过ttf文件可以定制宋体、楷体、黑体等多种字体。另外墨水屏显示器模块上增加两个贴片触摸开关，
-方便扩展更多应用。该墨水屏体积小巧，布局紧凑，即插即用，具有低功耗，阳光下可清晰显示，
-断电后保持最后一屏内容等特点。由于墨水屏全局刷新时间较长，不建议用于频繁动态刷新显示数据的场合。
-![产品效果图片](./resources/images/DFR0591.jpg)
+This Raspberry Pi e-ink display module comes with a 2.13" screen with a resolution of 250×122, adopting SPI interface to communicate with Raspberry Pi. It leads out the pins on Raspberry Pi, so there would be no conflicts if you need to use the e-ink display and Raspberry Pi’s pins at the same time. The display supports custom font. There are two patch touch switches on the module for expanding more applications. This e-ink display features small size, compact layout, plug and play, and low power consumption. It can provide clear display even in sunlight. When powered off, the e-ink display will continue to display the last screen. Since it will take a long time for the display to refresh fully, we don’t recommend using the product in the application that needs frequent refreshing to display data.
+
+![Product Image](./resources/images/DFR0591.jpg)
 
 ## Product Link（https://www.dfrobot.com/product-1866.html)
 
-    SKU： DFR0591： 2.13" e-ink Display Module for Raspberry Pi 4B/3B+/Zero W
+SKU： DFR0591： 2.13" e-ink Display Module for Raspberry Pi 4B/3B+/Zero W
 
 ## Table of Contents
 
@@ -23,340 +20,340 @@
 
 ## Summary
 
-   用于在树莓派上驱动 DFRobot Raspberry Pi E-ink Display Module 的 Python 库 。
+   This is a Python library used to drive the DFRobot Raspberry Pi e-ink display module on the Raspberry Pi.
 
 ## Installation
 
-要使用库，请首先下载该库到树莓派
+To use the library, first download it to the Raspberry Pi.
 
 ```
 git clone https://github.com/DFRobot/DFRobot_Eink_RPi_Display
 ```
 
-然后打开例程文件夹。使用命令
+Then open the example folder. Use the command:
 
 ```python
 python display_xxx.py
 ```
-来执行示例程序。
+Run the sample program.
 
 ## Methods
 
 ```python
 '''!
-  @brief 初始化获取树莓派墨水屏的ID
+  @brief Initialize and obtain the ID of the Raspberry Pi e-ink screen
 '''
 def begin(self):
 
 '''!
-  @brief 手动设置屏幕的版本号
+  @brief Manually set the version number of the screen
 '''
 def set_version(self, version):
 
 '''!
-  @brief 用户获取墨水屏的ID
+  @brief Get the ID of the e-ink screen
 '''  
 def read_id(self):
 
 '''!
-  @brief 设置ascii码的字体格式
-  @param fonts 字体类型
+  @brief Set the ASCII font format
+  @param fonts Font type
 '''
 def set_fonts(self, fonts):
 
 '''!
   @brief init with fonts file
-  @param obj 字体文件
+  @param obj Font file
 '''   
 def set_ex_fonts(self, obj):
 
 '''!
-  @brief 设置是否使能模式字体
+  @brief Enable or disable mode fonts
   @param opt True/False
 '''      
 def set_enable_default_fonts(self, opt):
 
 '''!
-  @brief 设置扩展字体的格式
-  @param width 字体宽度
-  @param height 字体高度
+  @brief Set the format of the extended font
+  @param width Font width
+  @param height Font height
 '''      
 def set_ex_fonts_fmt(self, width, height):
 
 '''!
-  @brief 设置ascii码的字体格式
-  @param fonts 字体类型
+  @brief  Set the ASCII font format
+  @param fonts  Font type
 '''     
 def set_fonts(self, fonts):
 
 '''!
   @brief init with fonts file
-  @param obj 字体文件
+  @param obj Font file
 '''        
 def set_ex_fonts(self, obj):
 
 '''!
-  @brief 设置是否使能模式字体
+  @brief Enable or disable mode fonts
   @param opt True/False
 '''        
 def set_enable_default_fonts(self, opt):
 
 '''!
-  @brief 设置扩展字体的格式
-  @param width 字体宽度
-  @param height 字体高度
+  @brief Set the format of the extended font
+  @param width Font width
+  @param height Font height
 '''    
 def set_ex_fonts_fmt(self, width, height):
 
 '''!
-  @brief 设置线段的宽度
+  @brief Set the line width
 '''        
 def set_line_width(self, w):
 
 '''!
-  @brief 设置文本格式
-  @param size 字体大小
-  @param color 字体颜色
-  @param background 字体的背景色
-  @param interval_row 字体行之间的间隔
-  @param interval_col 字体列之间的间隔
+  @brief Set the text format
+  @param size Font size
+  @param color Font color
+  @param background Font background color
+  @param interval_row Interval between font rows
+  @param interval_col Interval between font columns
 '''        
 def set_text_format(self, size, color, background, interval_row=2, interval_col=0):
 
 '''!
-  @brief 设置光标位置
-  @param x x轴坐标
-  @param y y轴坐标
+  @brief Set the cursor position
+  @param x  x-coordinate
+  @param y y-coordinate
 '''       
 def set_text_cursor(self, x, y):
 
 '''!
-  @brief 设置位图的尺寸
-  @param size 位图的大小
+  @brief Set the bitmap size
+  @param size Bitmap size
 '''        
 def set_bitmap_size(self, size):
 
 '''!
-  @brief 设置位图显示格式
-  @param fmt 格式配置
+  @brief Set bitmap display format
+  @param fmt Format configuration
 '''   
 def set_bitmap_fmt(self, fmt):
 
 '''!
-  @brief 设置字体
-  @param obj 字体
+  @brief Set font
+  @param obj font
 '''       
 def set_ex_fonts(self, obj):
 
 '''!
-  @brief 设置字体的宽度和高度
-  @param width 字体的宽度
-  @param height 字体的高度
+  @brief Set the width and height of the font
+  @param width Font width
+  @param height Font height
 '''        
 def set_ex_fonts_fmt(self, width, height):
 
 '''!
-  @brief 设置默认的字体
-  @param opt 字体类型
+  @brief Set the default font
+  @param opt Font type
 '''       
 def set_enable_default_fonts(self, opt):
 
 '''!
-  @brief 在屏幕(x,y)坐标处画一个点
-  @param x x轴坐标
-  @param y y轴坐标
-  @param color 颜色
+  @brief  Draw a point on the screen at (x,y) coordinate
+  @param x x-axis coordinate
+  @param y y-axis coordinate
+  @param color  Color
 '''        
 def pixel(self, x, y, color):
 
 '''!
-  @brief 在屏幕上显示一个字符
-  @param ch 字符的ascii码
+  @brief Display a character on the screen
+  @param ch ASCII code of the character
 '''        
 def write_one_char(self, ch):
 
 '''!
-  @brief 在屏幕上显示字符串
-  @param s 字符串
+  @brief Display a string on the screen
+  @param s String
 '''        
 def print_str(self, s):
 
 '''!
-  @brief 在屏幕上显示字符串,并换行
-  @param s 字符串
+  @brief Display a string on the screen and move to the next line
+  @param s String 
 '''        
 def print_str_ln(self, s):
 
 '''!
-  @brief 画一条垂直线
-  @param x x轴坐标
-  @param y y轴坐标
-  @param h 线长
-  @param color 颜色
+  @brief Draw a vertical line
+  @param x x-axis coordinate
+  @param y y-axis coordinate
+  @param h Line length
+  @param color Color
 '''
 def vertical_line(self, x, y, h, color):
 
 '''!
-  @brief 画一条水平线
-  @param x x轴坐标
-  @param y y轴坐标
-  @param w 线长
-  @param color 颜色
+  @brief Draw a horizontal line
+  @param x x-axis coordinate
+  @param y y-axis coordinate
+  @param w line length
+  @param color color
 '''
 def horizontal_line(self, x, y, w, color):
 
 '''!
-  @brief 画一条直线
-  @param x 直线的x轴起始坐标
-  @param y 直线的y轴起始坐标
-  @param x1 直线的x轴结束坐标
-  @param y1 直线的y轴结束坐标
-  @param color 颜色
+  @brief Draw a straight line
+  @param x  starting x-axis coordinate of the line
+  @param y starting y-axis coordinate of the line
+  @param x1 ending x-axis coordinate of the line
+  @param y1 ending y-axis coordinate of the line
+  @param color Color
 '''
 def line(self, x, y, x1, y1, color):
 
 '''!
-  @brief 画一个空心三角形
-  @param x 三角形第一个点的x坐标
-  @param y 三角形第一个点的y坐标
-  @param x1 三角形第二个点的x坐标
-  @param y1 三角形第二个点的y坐标
-  @param x2 三角形第三个点的x坐标
-  @param y2 三角形第三个点的y坐标
-  @param color 颜色
+  @brief Draw a hollow triangle
+  @param x x-coordinate of the first point of the triangle
+  @param y y-coordinate of the first point of the triangle
+  @param x1 x-coordinate of the second point of the triangle
+  @param y1 y-coordinate of the second point of the triangle
+  @param x2 x-coordinate of the third point of the triangle
+  @param y2 y-coordinate of the third point of the triangle
+  @param color Color
 '''
 def hollow_triangle(self, x, y, x1, y1, x2, y2, color):
 
 '''!
-  @brief 画一个实心三角形
-  @param x 三角形第一个点的x坐标
-  @param y 三角形第一个点的y坐标
-  @param x1 三角形第二个点的x坐标
-  @param y1 三角形第二个点的y坐标
-  @param x2 三角形第三个点的x坐标
-  @param y2 三角形第三个点的y坐标
-  @param color 颜色
+  @brief Draw a filled triangle
+  @param x x-coordinate of the first point of the triangle
+  @param y y-coordinate of the first point of the triangle
+  @param x1 x-coordinate of the second point of the triangle
+  @param y1 y-coordinate of the second point of the triangle
+  @param x2 x-coordinate of the third point of the triangle
+  @param y2 y-coordinate of the third point of the triangle
+  @param color Color
 '''
 def filled_triangle(self, x, y, x1, y1, x2, y2, color):
 
 '''!
-  @brief 画一个空心矩形
-  @param x 矩形起点x坐标
-  @param y 矩形起点y坐标
-  @param w 矩形宽度
-  @param h 矩形高度
-  @param color 颜色
+  @brief Draw a hollow rectangle
+  @param x x-coordinate of the starting point of the rectangle
+  @param y y-coordinate of the starting point of the rectangle
+  @param w Rectangle width 
+  @param h Rectangle height
+  @param color Color
 '''
 def hollow_rect(self, x, y, w, h, color):
 
 '''!
-  @brief 画一个实心矩形
-  @param x 矩形起点x坐标
-  @param y 矩形起点y坐标
-  @param w 矩形宽度
-  @param h 矩形高度
-  @param color 颜色
+  @brief Draw a solid rectangle
+  @param x x-coordinate of the starting point of the rectangle
+  @param y y-coordinate of the starting point of the rectangle
+  @param w Rectangle width 
+  @param h Rectangle height
+  @param color Color
 '''
 def filled_rect(self, x, y, w, h, color):
 
 '''!
-  @brief 画空心圆辅助函数
-  @param x 圆心的x坐标
-  @param y 圆心的y坐标
-  @param r 半径
-  @param quadrant 用来表示是哪一个四分之一圆
-  @param color 颜色
+  @brief Helper function for drawing a hollow circle
+  @param x X-coordinate of the center of the circle
+  @param y Y-coordinate of the center of the circle
+  @param r Radius of the circle
+  @param quadrant Used to indicate which quadrant of the circle to draw
+  @param color Color
 '''
 def hollow_circle_helper(self, x, y, r, quadrant, color):
 
 '''!
-  @brief 画一个空心圆
-  @param x 圆心的x坐标
-  @param y 圆心的y坐标
-  @param r 半径
-  @param color 颜色
+  @brief Draw a hollow circle
+  @param x X-coordinate of the center of the circle
+  @param y Y-coordinate of the center of the circle
+  @param r Radius of the circle
+  @param color Color
 '''
 def hollow_circle(self, x, y, r, color):
 
 '''!
-  @brief 画实心圆辅助函数
-  @param x 圆心的x坐标
-  @param y 圆心的y坐标
-  @param r 半径
-  @param quadrant 用来表示是哪一个四分之一圆
-  @param color 颜色
+  @brief Helper function for drawing a solid circle
+  @param x X-coordinate of the center of the circle
+  @param y Y-coordinate of the center of the circle
+  @param r Radius of the circle
+  @param quadrant Used to indicate which quadrant of the circle to draw
+  @param color Color
 '''
 def filled_circle_helper(self, x, y, r, quadrant, color):
 
 '''!
-  @brief 画一个空心圆
-  @param x 圆心的x坐标
-  @param y 圆心的y坐标
-  @param r 半径
-  @param color 颜色
+  @brief Draw a solid circle
+  @param x X-coordinate of the center of the circle
+  @param y Y-coordinate of the center of the circle
+  @param r Radius of the circle
+  @param color Color
 '''
 def filled_circle(self, x, y, r, color):
 
 '''!
-  @brief 画一个空心圆角矩形
-  @param x 矩形起点x坐标
-  @param y 矩形起点y坐标
-  @param w 矩形宽度
-  @param h 矩形高度
-  @param r 圆角的半径
-  @param color 颜色
+  @brief Draw a hollow rounded rectangle
+  @param x x-coordinate of the starting point of the rectangle
+  @param y y-coordinate of the starting point of the rectangle
+  @param w Rectangle width 
+  @param h Rectangle height
+  @param r Radius of the circle
+  @param color Color
 '''
 def hollow_rounded_rectangle(self, x, y, w, h, r, color):
 
 '''!
-  @brief 画一个实心圆角矩形
-  @param x 矩形起点x坐标
-  @param y 矩形起点y坐标
-  @param w 矩形宽度
-  @param h 矩形高度
-  @param r 圆角的半径
-  @param color 颜色
+  @brief Draw a solid rounded rectangle
+  @param x x-coordinate of the starting point of the rectangle
+  @param y y-coordinate of the starting point of the rectangle
+  @param w Rectangle width 
+  @param h Rectangle height
+  @param r Radius of the circle
+  @param color Color
 '''
 def filled_rounded_rectangle(self, x, y, w, h, r, color):
 
 '''!
-  @brief 画位图
-  @param x  起点x坐标
-  @param y  起点y坐标
-  @param bitmap  位图数组
-  @param w 位图的宽度
-  @param h 位图的高度
-  @param color 位图的颜色
-  @param background 位图的背景色
+  @brief Draw a bitmap
+  @param x Starting x-coordinate of the bitmap
+  @param y Starting y-coordinate of the bitmap
+  @param bitmap  Bitmap array
+  @param w Bitmap width 
+  @param h Bitmap height 
+  @param color Bitmap color 
+  @param background Bitmap background color 
 '''
 def bitmap(self, x, y, bitmap, w, h, color, background):
 
 '''!
-  @brief 把已经准备好的屏幕图像buffer发送出去,显示到墨水屏
-  @param mode: 显示的模式FULL全屏刷新,PART:局部刷新
+  @brief Send the prepared screen image buffer to the e-ink screen for display
+  @param mode: Display mode, FULL: full screen refresh, PART: partial refresh
 '''
 def flush(self, mode):
 
 '''!
-  @brief 绘制位图
-  @param x 位图起始x坐标
-  @param y 位图起始y坐标
+  @brief Draw a bitmap
+  @param x Starting x-coordinate of the bitmap
+  @param y Starting y-coordinate of the bitmap
 '''        
 def start_draw_bitmap_file(self, x, y):
 
 '''!
-  @brief 将位图数据buffer按规则移到到屏幕图像buffer
-  @param buf 待发送位图数据buffer
+  @brief Move the bitmap data buffer to the screen image buffer according to the rules
+  @param buf Bitmap data buffer to be sent
 '''
 def bitmap_file_helper(self, buf):
 
 '''!
-  @brief 把已经准备好的屏幕图像buffer发送出去,显示位图到墨水屏
+  @brief Send out the prepared screen image buffer and display the bitmap on the e-ink 
 '''
 def end_draw_bitmap_file(self):
 
 '''!
-  @brief 清除墨水屏上显示的东西
+  @brief Clear the content displayed on the e-ink screen
 '''
 def clear_screen(self):
     
