@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 """!
   @file DFRobot_RPi_Eink_Display.py
-  @brief 定义DFRobot_RPi_Eink_Display 类的基础结构，基础方法的实现，以及一些方便开发的工具
+  @brief Defines the basic structure of the DFRobot_RPi_Eink_Display class, implements basic methods, and provides some development tools for convenience
   @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   @license     The MIT License (MIT)
   @author      fengli(li.feng@dfrobot.com)
@@ -324,8 +324,8 @@ class Fonts:
 
     def set_fonts(self, fonts):
         """!
-          @brief 设置ascii码的字体格式
-          @param fonts 字体类型
+          @brief Set ASCII font format 
+          @param fonts font type
         """
         self._fonts_enabled = True
         self._fonts = fonts["fonts"]
@@ -339,7 +339,7 @@ class Fonts:
     def set_ex_fonts(self, obj):
         """!
           @brief init with fonts file
-          @param obj 字体文件
+          @param obj Font file 
         """
         self._extension_fonts_enabled = True
         self._extension_fonts = obj
@@ -347,7 +347,7 @@ class Fonts:
 
     def set_enable_default_fonts(self, opt):
         """!
-          @brief 设置是否使能模式字体
+          @brief Enable or disable mode fonts
           @param opt True/False
         """
         if opt:
@@ -357,9 +357,9 @@ class Fonts:
 
     def set_ex_fonts_fmt(self, width, height):
         """!
-          @brief 设置扩展字体的格式
-          @param width 字体宽度
-          @param height 字体高度
+          @brief Set the format of the extended font
+          @param width Font width
+          @param height Font height
         """
         if self._extension_fonts_enabled:
             self._extension_fonts.set_fmt(width, height)
@@ -368,12 +368,12 @@ class Fonts:
 
     def get_one_character(self, char_ascii):
         """!
-          @brief 获取字符的字体数据
-          @param char_ascii 字符的ascii码
-          @return rslt 字符列表
-          @return w 字符宽度
-          @return h 字符高度
-          @return fmt 字体格式
+          @brief Get the font data of a character
+          @param char_ascii ASCII code of the character
+          @return rslt List of character
+          @return w Character width
+          @return h  Character height
+          @return fmt Font format
         """
         w = 0
         h = 0
@@ -408,9 +408,9 @@ class FreetypeHelper:
 
     def set_fmt(self, width, height):
         """!
-          @brief 设置字体长宽
-          @param width 字体宽度
-          @param height 字体高度
+          @brief Set the font width and height
+          @param width Font width
+          @param height Font height
         """
         self._width = int(width)
         self._height = int(height)
@@ -418,19 +418,19 @@ class FreetypeHelper:
 
     def set_dis_lower_limit(self, limit):
         """!
-          @brief 设置字体颜色深度限制
-          @param limit 深度
+          @brief Set the color depth limit of the font
+          @param limit Depth
         """
         self._fade = limit
 
     def get_one(self, ch):
         """!
-          @brief 获取字符的字体数据
-          @param ch 字符的ascii码
-          @return rslt 字符列表
-          @return w 字符宽度
-          @return h 字符高度
-          @return fmt 字体格式
+          @brief Get the font data of a character
+          @param ch ASCII code of the character
+          @return rslt List of character
+          @return w Character width
+          @return h Character height
+          @return fmt Font format
         """
         self._face.load_char(ch)
         bitmap = self._face.glyph.bitmap
@@ -566,7 +566,7 @@ class DFRobot_Display():
 
     def set_line_width(self, w):
         """!
-          @brief 设置线段的宽度
+          @brief Set the width of a line segment
         """
         if w < 0:
             return
@@ -574,12 +574,12 @@ class DFRobot_Display():
 
     def set_text_format(self, size, color, background, interval_row=2, interval_col=0):
         """!
-          @brief 设置文本格式
-          @param size 字体大小
-          @param color 字体颜色
-          @param background 字体的背景色
-          @param interval_row 字体行之间的间隔
-          @param interval_col 字体列之间的间隔
+          @brief Set the format of text
+          @param size Font size
+          @param color Font color
+          @param background Background color of the font
+          @param interval_row Spacing between rows of text
+          @param interval_col Spacing between columns of text
         """
         self._text_color = color
         self._text_interval_row = interval_row
@@ -591,17 +591,17 @@ class DFRobot_Display():
 
     def set_text_cursor(self, x, y):
         """!
-          @brief 设置光标位置
-          @param x x轴坐标
-          @param y y轴坐标
+          @brief Set the cursor position
+          @param x x-coordinate
+          @param y y-coordinate
         """
         self._text_cursor_x = int(x)
         self._text_cursor_y = int(y)
 
     def set_bitmap_size(self, size):
         """!
-          @brief 设置位图的尺寸
-          @param size 位图的大小
+          @brief Set the bitmap size
+          @param size Bitmap size
         """
         if size < 0:
             return
@@ -609,53 +609,53 @@ class DFRobot_Display():
 
     def set_bitmap_fmt(self, fmt):
         """!
-          @brief 设置位图显示格式
-          @param fmt 格式配置
+          @brief Set bitmap display format
+          @param fmt Format configuration
         """
         self._bmp_fmt = fmt
 
     def set_ex_fonts(self, obj):
         """!
-          @brief 设置字体
-          @param obj 字体
+          @brief Set font
+          @param obj font
         """
         self._fonts.set_ex_fonts(obj)
 
     def set_ex_fonts_fmt(self, width, height):
         """!
-          @brief 设置字体的宽度和高度
-          @param width 字体的宽度
-          @param height 字体的高度
+          @brief Set the width and height of the font
+          @param width Font width
+          @param height Font height
         """
         self._fonts.set_ex_fonts_fmt(width, height)
 
     def set_enable_default_fonts(self, opt):
         """!
-          @brief 设置默认的字体
-          @param opt 字体类型
+          @brief Set the default font
+          @param opt Font type
         """
         self._fonts.set_enable_default_fonts(opt)
 
     def pixel(self, x, y, color):
         """!
-          @brief 在屏幕(x,y)坐标处画一个点
-          @param x x轴坐标
-          @param y y轴坐标
-          @param color 颜色
+          @brief Draw a point on the screen at (x,y) coordinate
+          @param x  x-axis coordinate
+          @param y  y-axis coordinate 
+          @param color Color
         """
         pass
 
     def write_one_char(self, ch):
         """!
-          @brief 在屏幕上显示一个字符
-          @param ch 字符的ascii码
+          @brief Display a character on the screen
+          @param ch ASCII code of the character
         """
         pass
 
     def print_str(self, s):
         """!
-          @brief 在屏幕上显示字符串
-          @param s 字符串
+          @brief Display a string on the screen
+          @param s String
         """
         try:
             s = str(s)
@@ -668,16 +668,16 @@ class DFRobot_Display():
 
     def print_str_ln(self, s):
         """!
-          @brief 在屏幕上显示字符串,并换行
-          @param s 字符串
+          @brief Display a string on the screen and move to the next line
+          @param s String 
         """
         self.print_str(s)
         self.write_one_char("\n")
 
     def clear(self, color):
         """!
-          @brief 清理屏幕
-          @param color 颜色
+          @brief Clear screen 
+          @param color  Color
         """
         self.filled_rect(0, 0, self._width, self._height, color)
         self._text_cursor_x = 0
@@ -685,11 +685,11 @@ class DFRobot_Display():
 
     def vertical_line(self, x, y, h, color):
         """!
-          @brief 画一条垂直线
-          @param x x轴坐标
-          @param y y轴坐标
-          @param h 这条线的长度
-          @param color 颜色
+          @brief Draw a vertical line
+          @param x x-axis coordinate
+          @param y y-axis coordinate
+          @param h Line length
+          @param color  Color
         """
         x = int(x)
         y = int(y)
@@ -706,11 +706,11 @@ class DFRobot_Display():
 
     def horizontal_line(self, x, y, w, color):
         """!
-          @brief 画一条水平线
-          @param x x轴坐标
-          @param y y轴坐标
-          @param w 这条线的长度
-          @param color 颜色
+          @brief Draw a horizontal line
+          @param x x-axis coordinate
+          @param y y-axis coordinate
+          @param w line length
+          @param color Color
         """
         x = int(x)
         y = int(y)
@@ -726,12 +726,12 @@ class DFRobot_Display():
 
     def line(self, x, y, x1, y1, color):
         """!
-          @brief 画一条直线
-          @param x 直线的x轴起始坐标
-          @param y 直线的y轴起始坐标
-          @param x1 直线的x轴结束坐标
-          @param y1 直线的y轴结束坐标
-          @param color 颜色
+          @brief Draw a straight line
+          @param x starting x-axis coordinate of the line
+          @param y starting y-axis coordinate of the line
+          @param x1 ending x-axis coordinate of the line
+          @param y1 ending y-axis coordinate of the line
+          @param color Color
         """
         x = int(x)
         y = int(y)
@@ -770,14 +770,14 @@ class DFRobot_Display():
 
     def hollow_triangle(self, x, y, x1, y1, x2, y2, color):
         """!
-          @brief 画一个空心三角形
-          @param x 三角形第一个点的x坐标
-          @param y 三角形第一个点的y坐标
-          @param x1 三角形第二个点的x坐标
-          @param y1 三角形第二个点的y坐标
-          @param x2 三角形第三个点的x坐标
-          @param y2 三角形第三个点的y坐标
-          @param color 颜色
+          @brief Draw a hollow triangle
+          @param x x-coordinate of the first point of the triangle
+          @param y y-coordinate of the first point of the triangle
+          @param x1 x-coordinate of the second point of the triangle
+          @param y1 y-coordinate of the second point of the triangle
+          @param x2 x-coordinate of the third point of the triangle
+          @param y2 y-coordinate of the third point of the triangle
+          @param color Color
         """
         self.line(x, y, x1, y1, color)
         self.line(x1, y1, x2, y2, color)
@@ -785,14 +785,14 @@ class DFRobot_Display():
 
     def filled_triangle(self, x, y, x1, y1, x2, y2, color):
         """!
-          @brief 画一个实心三角形
-          @param x 三角形第一个点的x坐标
-          @param y 三角形第一个点的y坐标
-          @param x1 三角形第二个点的x坐标
-          @param y1 三角形第二个点的y坐标
-          @param x2 三角形第三个点的x坐标
-          @param y2 三角形第三个点的y坐标
-          @param color 颜色
+          @brief Draw a filled triangle
+          @param x x-coordinate of the first point of the triangle
+          @param y y-coordinate of the first point of the triangle
+          @param x1 x-coordinate of the second point of the triangle
+          @param y1 y-coordinate of the second point of the triangle
+          @param x2 x-coordinate of the third point of the triangle
+          @param y2 y-coordinate of the third point of the triangle
+          @param color Color
         """
         self.line(x, y, x1, y1, color)
         self.line(x1, y1, x2, y2, color)
@@ -864,12 +864,12 @@ class DFRobot_Display():
 
     def hollow_rect(self, x, y, w, h, color):
         """!
-          @brief 画一个空心矩形
-          @param x 矩形起点x坐标
-          @param y 矩形起点y坐标
-          @param w 矩形宽度
-          @param h 矩形高度
-          @param color 颜色
+          @brief Draw a hollow rectangle
+          @param x x-coordinate of the starting point of the rectangle
+          @param y y-coordinate of the starting point of the rectangle
+          @param w Rectangle width 
+          @param h Rectangle height
+          @param color Color
         """
         if w < 0:
             x += w
@@ -884,12 +884,12 @@ class DFRobot_Display():
 
     def filled_rect(self, x, y, w, h, color):
         """!
-          @brief 画一个实心矩形
-          @param x 矩形起点x坐标
-          @param y 矩形起点y坐标
-          @param w 矩形宽度
-          @param h 矩形高度
-          @param color 颜色
+          @brief Draw a solid rectangle
+          @param x x-coordinate of the starting point of the rectangle
+          @param y y-coordinate of the starting point of the rectangle
+          @param w Rectangle width 
+          @param h Rectangle height
+          @param color Color
         """
         temp = self._line_width
         self._line_width = 1
@@ -908,12 +908,12 @@ class DFRobot_Display():
 
     def hollow_circle_helper(self, x, y, r, quadrant, color):
         """!
-          @brief 画空心圆辅助函数
-          @param x 圆心的x坐标
-          @param y 圆心的y坐标
-          @param r 半径
-          @param quadrant 用来表示是哪一个四分之一圆
-          @param color 颜色
+          @brief Helper function for drawing a hollow circle
+          @param x X-coordinate of the center of the circle
+          @param y Y-coordinate of the center of the circle
+          @param r Radius of the circle
+          @param quadrant Used to indicate which quadrant of the circle to draw
+          @param color Color
         """
         x = int(x)
         y = int(y)
@@ -964,22 +964,22 @@ class DFRobot_Display():
 
     def hollow_circle(self, x, y, r, color):
         """!
-          @brief 画一个空心圆
-          @param x 圆心的x坐标
-          @param y 圆心的y坐标
-          @param r 半径
-          @param color 颜色
+          @brief Draw a hollow circle
+          @param x X-coordinate of the center of the circle
+          @param y Y-coordinate of the center of the circle
+          @param r Radius of the circle
+          @param color Color
         """
         self.hollow_circle_helper(x, y, r, self.QUADRANT_ALL, color)
 
     def filled_circle_helper(self, x, y, r, quadrant, color):
         """!
-          @brief 画实心圆辅助函数
-          @param x 圆心的x坐标
-          @param y 圆心的y坐标
-          @param r 半径
-          @param quadrant 用来表示是哪一个四分之一圆
-          @param color 颜色
+          @brief Helper function for drawing a solid circle
+          @param x X-coordinate of the center of the circle
+          @param y Y-coordinate of the center of the circle
+          @param r Radius of the circle
+          @param quadrant Used to indicate which quadrant of the circle to draw
+          @param color Color
         """
         x = int(x)
         y = int(y)
@@ -1024,23 +1024,23 @@ class DFRobot_Display():
 
     def filled_circle(self, x, y, r, color):
         """!
-          @brief 画一个空心圆
-          @param x 圆心的x坐标
-          @param y 圆心的y坐标
-          @param r 半径
-          @param color 颜色
+          @brief Draw a solid circle
+          @param x X-coordinate of the center of the circle
+          @param y Y-coordinate of the center of the circle
+          @param r Radius of the circle
+          @param color Color
         """
         self.filled_circle_helper(x, y, r, self.QUADRANT_ALL, color)
 
     def hollow_rounded_rectangle(self, x, y, w, h, r, color):
         """!
-          @brief 画一个空心圆角矩形
-          @param x 矩形起点x坐标
-          @param y 矩形起点y坐标
-          @param w 矩形宽度
-          @param h 矩形高度
-          @param r 圆角的半径
-          @param color 颜色
+          @brief Draw a hollow rounded rectangle
+          @param x x-coordinate of the starting point of the rectangle
+          @param y y-coordinate of the starting point of the rectangle
+          @param w Rectangle width 
+          @param h Rectangle height
+          @param r Radius of the circle
+          @param color Color
         """
         x = int(x)
         y = int(y)
@@ -1064,13 +1064,13 @@ class DFRobot_Display():
 
     def filled_rounded_rectangle(self, x, y, w, h, r, color):
         """!
-          @brief 画一个实心圆角矩形
-          @param x 矩形起点x坐标
-          @param y 矩形起点y坐标
-          @param w 矩形宽度
-          @param h 矩形高度
-          @param r 圆角的半径
-          @param color 颜色
+          @brief Draw a solid rounded rectangle
+          @param x x-coordinate of the starting point of the rectangle
+          @param y y-coordinate of the starting point of the rectangle
+          @param w Rectangle width 
+          @param h Rectangle height
+          @param r Radius of the circle
+          @param color Color
         """
         x = int(x)
         y = int(y)
@@ -1117,14 +1117,14 @@ class DFRobot_Display():
 
     def bitmap(self, x, y, bitmap, w, h, color, background):
         """!
-          @brief 画位图
-          @param x  起点x坐标
-          @param y  起点y坐标
-          @param bitmap  位图数组
-          @param w 位图的宽度
-          @param h 位图的高度
-          @param color 位图的颜色
-          @param background 位图的背景色
+          @brief Draw a bitmap
+          @param x Starting x-coordinate of the bitmap
+          @param y Starting y-coordinate of the bitmap
+          @param bitmap  Bitmap array
+          @param w Bitmap width 
+          @param h Bitmap height 
+          @param color Bitmap color 
+          @param background Bitmap background color 
         """
         if w < 0 or h < 0:
             return
@@ -1182,10 +1182,10 @@ class DFRobot_Display():
 
     def bitmap_file(self, x, y, path):
         """!
-          @brief 画位图
-          @param x  起点x坐标
-          @param y  起点y坐标
-          @param path  位图文件所在的路径
+          @brief Draw a bitmap
+          @param x Starting x-coordinate of the bitmap
+          @param y Starting y-coordinate of the bitmap
+          @param path  Bitmap file path 
         """
         try:
             f = open(path, "rb")
@@ -1255,8 +1255,8 @@ class DFRobot_Display():
 
     def write_one_char(self, c):
         """!
-          @brief 在墨水屏上显示一个字符
-          @param c char类型的字符数据
+          @brief Dispaly a char on the screen 
+          @param c char data 
         """
         if len(c) > 1:
             c = c[0]
@@ -1364,7 +1364,7 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
 
     def begin(self):
         """!
-          @brief 初始化获取树莓派墨水屏的ID
+          @brief Initialize and obtain the ID of the Raspberry Pi e-ink screen
         """
         version = self.read_id()
         if version[0] == 0x01:
@@ -1374,10 +1374,10 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
 
     def pixel(self, x, y, color):
         """!
-          @brief 在屏幕的(x,y)坐标画一个点
-          @param x x轴坐标
-          @param y y轴坐标
-          @param color 颜色
+          @brief Draw a point on the screen at (x,y) coordinate
+          @param x x-axis coordinate
+          @param y y-axis coordinate
+          @param color  Color
         """
         if x < 0 or x >= self._width:
             return
@@ -1400,8 +1400,8 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
 
     def flush(self, mode):
         """!
-          @brief 把已经准备好的屏幕图像buffer发送出去,显示到墨水屏
-          @param mode: 显示的模式FULL全屏刷新,PART:局部刷新
+          @brief Send the prepared screen image buffer to the e-ink screen for display
+          @param mode: Display mode, FULL: full screen refresh, PART: partial refresh
         """
         if mode != self.FULL and mode != self.PART:
             return
@@ -1418,17 +1418,17 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
 
     def start_draw_bitmap_file(self, x, y):
         """!
-          @brief 绘制位图
-          @param x 位图起始x坐标
-          @param y 位图起始y坐标
+          @brief Draw a bitmap
+          @param x Starting x-coordinate of the bitmap
+          @param y Starting y-coordinate of the bitmap
         """
         self._bitmap_file_start_x = x
         self._bitmap_file_start_y = y
 
     def bitmap_file_helper(self, buf):
         """!
-          @brief 将位图数据buffer按规则移到到屏幕图像buffer
-          @param buf 待发送位图数据buffer
+          @brief Move the bitmap data buffer to the screen image buffer according to the rules
+          @param buf Bitmap data buffer to be sent
         """
         for i in range(len(buf) // 3):
             addr = i * 3
@@ -1440,14 +1440,14 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
 
     def end_draw_bitmap_file(self):
         """!
-          @brief 把已经准备好的屏幕图像buffer发送出去,显示位图到墨水屏
+          @brief Send out the prepared screen image buffer and display the bitmap on the e-ink 
         """
         # self.flush(self.PART)
         time.sleep(0.01)
 
     def clear_screen(self):
         """!
-          @brief 清除墨水屏上显示的东西
+          @brief Clear the content displayed on the e-ink screen
         """
         self.clear(self.WHITE)
         self.flush(self.FULL)
@@ -1458,13 +1458,13 @@ class DFRobot_RPi_Eink_Display(DFRobot_Display):
 
     def set_version(self, version):
         """!
-          @brief 手动设置屏幕的版本号
+          @brief Manually set the version number of the screen
         """
         self.VERSION = version
 
     def read_id(self):
         """!
-          @brief 用户获取墨水屏的ID
+          @brief Get the ID of the e-ink screen
         """
         self.write_cmd_and_data(0x2f, [])
         return self.read_data(1)
