@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 """!
   @file display_printString.py
-  @brief 在屏幕上显示字符，字符串。
-  @n print with fonts file, Different files will have different display effects
+  @brief Display char and string on the screen 
+  @n print with fonts file, different files will have different display effects
   @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   @License     The MIT License (MIT)
   @author      fengli(li.feng@dfrobot.com)
