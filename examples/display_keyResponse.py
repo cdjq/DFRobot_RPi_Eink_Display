@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 """!
   @file display_keyResponse.py
-  @brief 按键keyA和keyB测试
+  @brief Test keyA and keyB
   @n after clear screen, click keyA or keyB, you can see "A" or "B" printed on your device
   @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   @License     The MIT License (MIT)
