@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 """!
   @file display_cleanup.py
-  @brief 清空显示内容
-  @n 实验现象：该程序可以清除墨水屏的显示内容，使屏幕恢复到最初状态
+  @brief Clear the display content
+  @n Experimental phenomenon: This program can clear the display content of the e-ink screen, making the screen return to its initial state.
   @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   @License     The MIT License (MIT)
   @author      fengli(li.feng@dfrobot.com)
