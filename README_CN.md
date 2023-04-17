@@ -289,7 +289,7 @@ def hollow_circle(self, x, y, r, color):
 def filled_circle_helper(self, x, y, r, quadrant, color):
 
 '''!
-  @brief 画一个空心圆
+  @brief 画一个实心圆
   @param x 圆心的x坐标
   @param y 圆心的y坐标
   @param r 半径
